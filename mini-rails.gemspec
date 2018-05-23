@@ -6,12 +6,12 @@ require "mini/rails/version"
 Gem::Specification.new do |spec|
   spec.name          = "mini-rails"
   spec.version       = Mini::Rails::VERSION
-  spec.authors       = ["TODO: Write your name"]
+  spec.authors       = ["Ralph"]
   spec.email         = ["rbolo062@uottawa.ca"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{A mini rails clone}
+  spec.description   = %q{An rails clone implementation}
+  spec.homepage      = "http://ralphbolo.com"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
