@@ -21,6 +21,13 @@ class ActiveRecordTest < Minitest::Test
     assert_equal "Standard Lorem Ipsum", post.title
   end
 
+  def test_all
+    post = Post.all.first
+    assert_kind_of Post, post
+    assert_equal 1, post.id
+    assert_equal "Standard Lorem Ipsum", post.title
+  end
+
   def test_execute_sql
     rows = Post.connection.execute("Select * from posts")
     assert_kind_of Array, rows
