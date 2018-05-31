@@ -1,7 +1,7 @@
 require "test_helper"
 require "active_record"
-require "test_blog/app/models/application_record"
-require "test_blog/app/models/post"
+# require "test_blog/app/models/application_record"
+# require "test_blog/app/models/post"
 
 class ActiveRecordTest < Minitest::Test
   def setup

@@ -25,8 +25,7 @@ module ActiveRecord
     end
 
     def self.find(id)
-     find_by_sql("SELECT * FROM #{table_name} WHERE id = #{id.to_i}").first
-  
+      find_by_sql("SELECT * FROM #{table_name} WHERE id = #{id.to_i}").first
     end
 
     def self.all
