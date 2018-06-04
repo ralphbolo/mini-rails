@@ -44,4 +44,34 @@ class ActionDispatchTest < Minitest::Test
     assert_equal "new", route.action
     assert_equal "new_post", route.name
   end
+
+  def test_call
+    routes = Rails.application.routes
+
+    request = Rack::MockRequest.new(routes)
+
+    assert request.get("/").ok?
+    assert request.get("/posts").ok?
+    assert request.get("/posts/new").ok?
+    assert request.get("/posts/show?id=1").ok?
+
+    assert request.post("/").not_found?
+  end
+
+  def test_middleware_stack
+    app = Rails.application
+
+    request = Rack::MockRequest.new(app)
+
+    assert request.get("/").ok?
+    assert request.get("/posts").ok?
+    assert request.get("/posts/new").ok?
+    assert request.get("/posts/show?id=1").ok?
+
+    assert request.post("/").not_found?
+
+    assert request.get("/favicon.ico").ok?
+    assert request.get("/assets/application.js").ok?
+    assert request.get("/assets/application.css").ok?
+  end
 end

@@ -3,16 +3,22 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+
+    response.write "<h1>Index page</h1>"
+    @posts.each do |post|
+      response.write "<h2>#{post.title}</h2>"
+    end
   end
 
   def show
     
   end
 
+  def new
+  end
+
   private
     def set_post
       @post = Post.find(params[:id])
-      # @post = Post.find(1)
     end
-  
 end
