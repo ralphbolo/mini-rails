@@ -11,6 +11,9 @@ module ActionView
     def csrf_meta_tags
     end
 
+    def csp_meta_tag
+    end
+
     def h(text)
       ERB::Util.h text
     end
