@@ -54,6 +54,16 @@ module ActionDispatch
         Module.new do
           routes.each do |route|
             if route.name 
+              
+              # define_method explanation
+              
+              # define_method(:my_method) do |foo, bar| # or even |*args|
+              #   # do something
+              # end
+          
+              # def my_method(foo, bar)
+              #   # do something
+              # end
               define_method(route.name + "_path") do | params = nil |
                 if params
                   route.path + "?" + Rack::Utils.build_query(params)
