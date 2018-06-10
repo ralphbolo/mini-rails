@@ -15,6 +15,26 @@ class ActionCableTest < Minitest::Test
   def test_subscribe
     connection = ActionCable.server.connections.first
     assert connection
+
+    @websocket.send(JSON.dump(command: 'subscribe', channel: 'ChatChannel'))
+
+    wait_for { connection.subscriptions["ChatChannel"] }
+
+    assert ActionCable.server.pubsub.subscribed?("chat")
+  end
+
+  def test_message
+    @websocket.send(JSON.dump(command: 'subscribe', channel: 'ChatChannel'))
+
+    received = nil
+    @websocket.on :message do |event|
+      received = JSON.parse(event.data)
+    end
+
+    @websocket.send(JSON.dump(command: 'message', channel: 'ChatChannel', data: 'hello'))
+
+    wait_for { received }
+    assert_equal({ 'channel' => 'ChatChannel', 'message' => 'hello' }, received)
   end
 
   def teardown
