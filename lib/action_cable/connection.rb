@@ -7,8 +7,14 @@ module ActionCable
 
       def initialize(server, env)
         @server = server
+        @env = env
         @websocket = Faye::WebSocket.new(env)
         @subscriptions = {}
+
+        @websocket.on :open do | event |
+          connect if respond_to? :connect
+        end
+
         @websocket.on :message do | event |
           execute_command(JSON.parse(event.data))
         end
@@ -16,6 +22,14 @@ module ActionCable
 
       def process
         @websocket.rack_response
+      end
+
+      def request
+        @request ||= Rack::Request.new(@env)
+      end
+
+      def close
+        @websocket.close
       end
 
       def transmit(data)
